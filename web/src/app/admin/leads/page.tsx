@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Search, Eye, RefreshCw } from 'lucide-react';
-import { api, Lead } from '@/lib/api';
+import { api, Lead, ApiError } from '@/lib/api';
 
 export default function AdminLeads() {
     const [leads, setLeads] = useState<Lead[]>([]);
@@ -19,14 +19,14 @@ export default function AdminLeads() {
             const token = localStorage.getItem('admin_token') || '';
             const res = await api.admin.leads(token, { search });
             setLeads(res.items || []);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Failed to fetch leads:', err);
-            if (err.status === 401 || err.code === 'INVALID_TOKEN' || err.code === 'NO_TOKEN') {
+            if (err instanceof ApiError && (err.status === 401 || err.code === 'INVALID_TOKEN' || err.code === 'NO_TOKEN')) {
                 localStorage.removeItem('admin_token');
                 window.location.href = '/admin/login';
                 return;
             }
-            setError(err.message || String(err));
+            setError(err instanceof Error ? err.message : String(err));
             setLeads([]);
         } finally {
             setLoading(false);

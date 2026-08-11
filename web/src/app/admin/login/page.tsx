@@ -23,8 +23,8 @@ export default function AdminLogin() {
             const res = await api.admin.login(email as string, password as string);
             localStorage.setItem('admin_token', res.token);
             router.push('/admin');
-        } catch (err: any) {
-            setError(err.message || 'Invalid email or password');
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : 'Invalid email or password');
         } finally {
             setIsLoading(false);
         }
