@@ -83,7 +83,7 @@
     inset-inline: 0;
     top: 0;
     height: 4px;
-    background: linear-gradient(90deg, #60A5FA, #A78BFA, #34D399); /* Brihat style pastel gradient */
+    background: linear-gradient(90deg, #0B1F4A, #1246A0, #0066FF);
     opacity: 1; /* Always visible */
   }
 
@@ -93,13 +93,13 @@
   }
 
   .card-number {
-    @apply absolute -bottom-6 -right-2 text-[120px] font-bold text-slate-100 leading-none select-none z-0;
+    @apply absolute bottom-2 right-4 text-[120px] font-bold text-slate-100 leading-none select-none z-0;
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
-  .section { @apply py-20 px-4; }
-  .section-sm { @apply py-12 px-4; }
-  .container-tf { @apply max-w-7xl mx-auto; }
+  .section { @apply py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8; }
+  .section-sm { @apply py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8; }
+  .container-tf { @apply w-full max-w-7xl mx-auto; }
 
   .text-gradient {
     background: linear-gradient(135deg, #0B1F4A 0%, #1246A0 50%, #0066FF 100%);

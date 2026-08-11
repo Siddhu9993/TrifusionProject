@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Lock, Mail, ArrowRight } from 'lucide-react';
+import { api } from '@/lib/api';
 
 export default function AdminLogin() {
     const router = useRouter();
@@ -19,16 +20,11 @@ export default function AdminLogin() {
         const password = formData.get('password');
 
         try {
-            // For now, simple mock login
-            // In reality, this would hit our Express backend: /api/admin/login
-            if (email === 'admin@trifusion.com' && password === 'admin123') {
-                localStorage.setItem('admin_token', 'mock_token_123');
-                router.push('/admin');
-            } else {
-                setError('Invalid email or password');
-            }
-        } catch {
-            setError('An error occurred during login');
+            const res = await api.admin.login(email as string, password as string);
+            localStorage.setItem('admin_token', res.token);
+            router.push('/admin');
+        } catch (err: any) {
+            setError(err.message || 'Invalid email or password');
         } finally {
             setIsLoading(false);
         }

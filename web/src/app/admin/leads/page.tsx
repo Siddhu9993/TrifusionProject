@@ -10,13 +10,23 @@ export default function AdminLeads() {
     const [search, setSearch] = useState('');
     const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
 
+    const [error, setError] = useState<string | null>(null);
+
     const fetchLeads = useCallback(async () => {
         setLoading(true);
+        setError(null);
         try {
             const token = localStorage.getItem('admin_token') || '';
             const res = await api.admin.leads(token, { search });
             setLeads(res.items || []);
-        } catch {
+        } catch (err: any) {
+            console.error('Failed to fetch leads:', err);
+            if (err.status === 401 || err.code === 'INVALID_TOKEN' || err.code === 'NO_TOKEN') {
+                localStorage.removeItem('admin_token');
+                window.location.href = '/admin/login';
+                return;
+            }
+            setError(err.message || String(err));
             setLeads([]);
         } finally {
             setLoading(false);
@@ -76,6 +86,12 @@ export default function AdminLeads() {
             <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                 {loading ? (
                     <div className="p-12 text-center text-slate-400 text-sm">Loading leads...</div>
+                ) : error ? (
+                    <div className="p-12 text-center text-red-500">
+                        <div className="text-3xl mb-2">❌</div>
+                        <h3 className="text-lg font-bold mb-1">Failed to Load</h3>
+                        <p className="text-sm">{error}</p>
+                    </div>
                 ) : leads.length === 0 ? (
                     <div className="p-12 text-center">
                         <div className="text-3xl mb-2">📥</div>

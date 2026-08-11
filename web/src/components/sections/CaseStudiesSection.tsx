@@ -6,6 +6,13 @@ interface Props {
     caseStudies: CaseStudy[];
 }
 
+// Subtle on-brand accent variations — navy shifts, all consistent with brand palette
+const CARD_HEADER_STYLES = [
+    'bg-gradient-to-br from-[#0B1F4A] to-[#1246A0]',
+    'bg-gradient-to-br from-[#0D2B5E] to-[#0055CC]',
+    'bg-gradient-to-br from-[#132952] to-[#003D99]',
+];
+
 export function CaseStudiesSection({ caseStudies }: Props) {
     return (
         <section className="section bg-[#F8FAFF]">
@@ -26,12 +33,14 @@ export function CaseStudiesSection({ caseStudies }: Props) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {caseStudies.map(cs => (
+                    {caseStudies.map((cs, index) => (
                         <Link key={cs.id} href={`/case-studies/${cs.slug}`} className="card group block overflow-hidden">
-                            {/* Header */}
-                            <div className="h-40 bg-gradient-to-br from-[#0B1F4A] to-[#1246A0] flex items-center justify-center p-6">
-                                <h3 className="text-white font-bold text-lg text-center leading-snug"
-                                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+                            {/* Header — subtle color variation per card */}
+                            <div className={`h-40 ${CARD_HEADER_STYLES[index % CARD_HEADER_STYLES.length]} flex items-center justify-center p-6`}>
+                                <h3
+                                    className="text-white font-bold text-lg text-center leading-snug"
+                                    style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                                >
                                     {cs.title}
                                 </h3>
                             </div>

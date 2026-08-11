@@ -5,24 +5,27 @@
 // ============================================================
 
 export const siteConfig = {
-    name: "Trifusion Technology LLP",
+    name: "TriFusion Tech LLP",
     tagline: "Engineering Digital Products That Move Businesses Forward",
-    description: "Trifusion Technology LLP builds custom software, SaaS products, mobile applications, and AI-powered systems for businesses ready to scale.",
+    description: "TriFusion Tech LLP builds custom software, GST accounting systems, mobile applications, and AI-powered systems for businesses ready to scale.",
     url: process.env.NEXT_PUBLIC_SITE_URL || "https://trifusiontechnology.in",
     ogImage: "/images/og-default.png",
 
     contact: {
-        email: process.env.TRIFUSION_EMAIL || "hello@trifusiontechnology.in",
-        phone: process.env.TRIFUSION_PHONE || "[TODO: Add phone number]",
-        whatsapp: process.env.TRIFUSION_WHATSAPP || "[TODO: Add WhatsApp]",
-        address: process.env.TRIFUSION_ADDRESS || "[TODO: Add office address]",
+        email: process.env.TRIFUSION_EMAIL || "trifusiontech.llp@gmail.com",
+        phone: process.env.TRIFUSION_PHONE || "+91 93095 05277",
+        whatsapp: process.env.TRIFUSION_WHATSAPP || "+919309505277",
+        address: process.env.TRIFUSION_ADDRESS || "Katraj-Kondhwa Road, Katraj, Pune - 411046, Maharashtra, India",
+        addressShort: "Katraj-Kondhwa Road, Katraj, Pune - 411046",
+        mapsUrl: "https://maps.google.com/?q=Katraj-Kondhwa+Road,+Katraj,+Pune+411046",
     },
 
     social: {
-        linkedin: process.env.LINKEDIN_URL || "https://linkedin.com/company/trifusion-technology",
-        twitter: process.env.TWITTER_URL || "",
-        github: process.env.GITHUB_URL || "",
-        instagram: process.env.INSTAGRAM_URL || "",
+        linkedin:  "https://www.linkedin.com/in/trifusion-technology-llp-031447427",
+        twitter:   "https://x.com/trifusiontech",
+        instagram: "https://www.instagram.com/trifusiontechnology?igsh=dGZheGNnM2xkZ2t3",
+        facebook:  "https://www.facebook.com/profile.php?id=61593171780174",
+        github:    "",
     },
 
     // Navigation structure
@@ -31,7 +34,7 @@ export const siteConfig = {
             { label: "Custom Software Development", href: "/solutions/custom-software-development" },
             { label: "Web Application Development", href: "/solutions/web-application-development" },
             { label: "Mobile App Development", href: "/solutions/mobile-app-development" },
-            { label: "SaaS Product Development", href: "/solutions/saas-product-development" },
+            { label: "Smart GST & Accounting Systems", href: "/solutions/smart-gst-accounting" },
             { label: "AI & Machine Learning", href: "/solutions/ai-ml" },
             { label: "Data Analytics & BI", href: "/solutions/data-analytics" },
             { label: "Cloud & DevOps", href: "/solutions/cloud-devops" },
@@ -135,7 +138,7 @@ export const siteConfig = {
             { label: "Custom Software", href: "/solutions/custom-software-development" },
             { label: "Web Applications", href: "/solutions/web-application-development" },
             { label: "Mobile Apps", href: "/solutions/mobile-app-development" },
-            { label: "SaaS Products", href: "/solutions/saas-product-development" },
+            { label: "Smart GST & Accounting", href: "/solutions/smart-gst-accounting" },
             { label: "AI & ML", href: "/solutions/ai-ml" },
         ],
         company: [

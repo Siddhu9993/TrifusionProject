@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingContactWidget } from "@/components/ui/FloatingContactWidget";
+import { ProjectDrawer } from "@/components/ui/ProjectDrawer";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -11,9 +13,9 @@ export const metadata: Metadata = {
         template: siteConfig.seo.titleTemplate,
     },
     description: siteConfig.seo.defaultDescription,
-    keywords: ["software development", "SaaS", "mobile apps", "AI", "custom software", "Trifusion Technology", "digital products"],
-    authors: [{ name: "Trifusion Technology LLP" }],
-    creator: "Trifusion Technology LLP",
+    keywords: ["software development", "GST accounting", "mobile apps", "AI", "custom software", "TriFusion Tech LLP", "digital products"],
+    authors: [{ name: "TriFusion Tech LLP" }],
+    creator: "TriFusion Tech LLP",
     openGraph: {
         type: "website",
         locale: "en_IN",
@@ -40,6 +42,8 @@ export const metadata: Metadata = {
     },
 };
 
+import { PublicOnly, MainWrapper } from "@/components/layout/PublicOnly";
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -52,12 +56,21 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
             </head>
             <body className="min-h-screen flex flex-col">
-                <Navbar />
-                <main className="flex-1 pt-16">
+                <PublicOnly>
+                    <Navbar />
+                </PublicOnly>
+                
+                <MainWrapper>
                     {children}
-                </main>
-                <Footer />
+                </MainWrapper>
+                
+                <PublicOnly>
+                    <Footer />
+                    <FloatingContactWidget />
+                    <ProjectDrawer />
+                </PublicOnly>
             </body>
         </html>
     );
 }
+

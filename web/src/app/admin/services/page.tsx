@@ -6,7 +6,7 @@ import { Plus, Search, Edit2, Trash2, MoreVertical } from 'lucide-react';
 export default function AdminServices() {
     const [services] = useState([
         { id: '1', title: 'Digital Platforms', status: 'Published', lastUpdated: 'Oct 24, 2023' },
-        { id: '2', title: 'SaaS Products', status: 'Published', lastUpdated: 'Oct 21, 2023' },
+        { id: '2', title: 'Smart GST & Accounting', status: 'Published', lastUpdated: 'Oct 21, 2023' },
         { id: '3', title: 'Mobile Applications', status: 'Draft', lastUpdated: 'Oct 15, 2023' },
         { id: '4', title: 'AI-Powered Systems', status: 'Published', lastUpdated: 'Oct 12, 2023' },
         { id: '5', title: 'Workflow Automation', status: 'Published', lastUpdated: 'Oct 10, 2023' },

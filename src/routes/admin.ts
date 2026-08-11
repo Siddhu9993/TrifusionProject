@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { prisma } from '../utils/prisma.js';
+import { readLeadRows } from '../services/googleSheets.js';
 import { ok, serverError } from '../utils/response.js';
 import { authenticateToken, requireAdmin } from '../middlewares/auth.js';
 
@@ -8,9 +9,9 @@ const router = Router();
 // GET /api/admin/stats — dashboard overview
 router.get('/stats', authenticateToken, requireAdmin, async (_req, res) => {
     try {
+        // Leads come from Google Sheets; everything else from Prisma/SQLite
         const [
-            totalLeads,
-            newLeads,
+            leadRows,
             services,
             publishedServices,
             industries,
@@ -22,8 +23,7 @@ router.get('/stats', authenticateToken, requireAdmin, async (_req, res) => {
             jobs,
             applications,
         ] = await Promise.all([
-            prisma.lead.count(),
-            prisma.lead.count({ where: { status: 'NEW' } }),
+            readLeadRows().catch(() => []),        // graceful fallback
             prisma.service.count(),
             prisma.service.count({ where: { published: true } }),
             prisma.industry.count({ where: { published: true } }),
@@ -35,6 +35,9 @@ router.get('/stats', authenticateToken, requireAdmin, async (_req, res) => {
             prisma.job.count({ where: { published: true } }),
             prisma.jobApplication.count(),
         ]);
+
+        const totalLeads = leadRows.length;
+        const newLeads   = leadRows.filter(r => r['Status'] === 'New').length;
 
         return ok(res, {
             leads: { total: totalLeads, new: newLeads },
@@ -54,11 +57,18 @@ router.get('/stats', authenticateToken, requireAdmin, async (_req, res) => {
 // GET /api/admin/leads/recent
 router.get('/leads/recent', authenticateToken, requireAdmin, async (_req, res) => {
     try {
-        const leads = await prisma.lead.findMany({
-            take: 5,
-            orderBy: { createdAt: 'desc' },
-        });
-        return ok(res, leads);
+        const rows = await readLeadRows();
+        // Return the 5 most recent (rows are in append order, so last 5)
+        const recent = rows.slice(-5).reverse().map(r => ({
+            id:        r['ID'],
+            leadRef:   r['ID'],
+            name:      r['Name'],
+            email:     r['Email'],
+            company:   r['Company'],
+            status:    r['Status'],
+            createdAt: r['Timestamp'],
+        }));
+        return ok(res, recent);
     } catch (err) {
         return serverError(res, err);
     }

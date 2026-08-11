@@ -24,12 +24,19 @@ const initialState: FormData = {
 
 const services = [
     'Custom Software Development', 'Web Application Development', 'Mobile App Development',
-    'SaaS Product Development', 'AI & Machine Learning', 'Data Analytics & BI',
+    'Smart GST & Accounting Systems', 'AI & Machine Learning', 'Data Analytics & BI',
     'Cloud & DevOps', 'API & System Integration', 'UI/UX Engineering', 'Digital Transformation',
     'Other / Not sure yet',
 ];
 
-const budgets = ['Under ₹5L', '₹5L – ₹15L', '₹15L – ₹50L', '₹50L+', 'Let\'s discuss'];
+const budgets = [
+    'Under ₹30K',
+    '₹30K – ₹50K',
+    '₹50K – ₹1L',
+    '₹1L – ₹2L',
+    '₹2L – ₹5L',
+    "Let's discuss",
+];
 const contactMethods = ['Email', 'Phone call', 'WhatsApp', 'Video call'];
 
 export function ContactForm() {
@@ -108,7 +115,7 @@ export function ContactForm() {
                         type="text"
                         value={form.name}
                         onChange={handleChange}
-                        placeholder="John Smith"
+                        placeholder="Your full name"
                         className={`input ${errors.name ? 'border-red-400 focus:border-red-500' : ''}`}
                         aria-describedby={errors.name ? 'name-error' : undefined}
                     />
@@ -122,7 +129,7 @@ export function ContactForm() {
                         type="email"
                         value={form.email}
                         onChange={handleChange}
-                        placeholder="john@company.com"
+                        placeholder="your@email.com"
                         className={`input ${errors.email ? 'border-red-400 focus:border-red-500' : ''}`}
                         aria-describedby={errors.email ? 'email-error' : undefined}
                     />
@@ -140,7 +147,7 @@ export function ContactForm() {
                         type="tel"
                         value={form.phone}
                         onChange={handleChange}
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 XXXXX XXXXX"
                         className="input"
                     />
                 </div>
@@ -152,7 +159,7 @@ export function ContactForm() {
                         type="text"
                         value={form.company}
                         onChange={handleChange}
-                        placeholder="Acme Corp"
+                        placeholder="Your company (optional)"
                         className="input"
                     />
                 </div>

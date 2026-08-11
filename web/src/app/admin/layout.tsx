@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
@@ -36,6 +36,16 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
     // Simple auth check - if we're on the login page, don't show the dashboard shell
     const isLoginPage = pathname === '/admin/login';
+
+    // Redirect to login if no token
+    useEffect(() => {
+        if (!isLoginPage) {
+            const token = localStorage.getItem('admin_token');
+            if (!token) {
+                router.push('/admin/login');
+            }
+        }
+    }, [isLoginPage, router]);
 
     if (isLoginPage) {
         return <>{children}</>;

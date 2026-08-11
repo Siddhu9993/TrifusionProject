@@ -56,7 +56,7 @@ export default async function ProductsPage() {
                                     <div>
                                         <div className="flex items-center justify-between mb-4">
                                             <span className="px-3 py-1 rounded-full bg-blue-50 text-[#0066FF] text-xs font-semibold uppercase tracking-wider">
-                                                {p.category || 'SaaS Product'}
+                                                {p.category || 'Smart GST & Accounting'}
                                             </span>
                                             <span className="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-xs font-medium">
                                                 {p.status}

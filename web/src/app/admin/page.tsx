@@ -15,7 +15,13 @@ export default function AdminDashboard() {
             const token = localStorage.getItem('admin_token') || '';
             const data = await api.admin.stats(token);
             setStats(data);
-        } catch {
+        } catch (err: any) {
+            console.error('Failed to fetch stats:', err);
+            if (err.status === 401 || err.code === 'INVALID_TOKEN' || err.code === 'NO_TOKEN') {
+                localStorage.removeItem('admin_token');
+                window.location.href = '/admin/login';
+                return;
+            }
             setStats(null);
         } finally {
             setLoading(false);

@@ -70,7 +70,7 @@ export function IndustriesSection() {
                                         <p className="text-slate-700 text-sm leading-relaxed">{current.challenge}</p>
                                     </div>
                                     <div className="bg-green-50 rounded-xl p-5">
-                                        <h4 className="text-sm font-semibold text-green-700 uppercase tracking-wider mb-2">Trifusion Solution</h4>
+                                        <h4 className="text-sm font-semibold text-green-700 uppercase tracking-wider mb-2">Our Solution</h4>
                                         <p className="text-slate-700 text-sm leading-relaxed">{current.solution}</p>
                                     </div>
                                 </div>

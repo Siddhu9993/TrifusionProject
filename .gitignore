@@ -8,3 +8,9 @@ node_modules
 web/.next  
 *.log  
 .agents/ 
+
+# Google Service Account credentials — NEVER commit
+credentials/
+google-service-account*.json
+*-service-account.json
+service-account-*.json
