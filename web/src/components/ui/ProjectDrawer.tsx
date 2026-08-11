@@ -173,7 +173,7 @@ export function ProjectDrawer() {
                                         Message received!
                                     </h3>
                                     <p className="text-slate-500 text-sm max-w-xs mb-4">
-                                        We'll review your enquiry and respond within one business day.
+                                        We&apos;ll review your enquiry and respond within one business day.
                                     </p>
                                     {leadRef && (
                                         <div className="inline-block px-4 py-2 bg-blue-50 rounded-lg mb-6">
@@ -242,7 +242,7 @@ export function ProjectDrawer() {
                                     <div>
                                         <label className="block text-xs font-semibold text-slate-600 mb-1.5">Tell us about your project *</label>
                                         <textarea name="message" value={form.message} onChange={handleChange} rows={4}
-                                            placeholder="What are you building? What's your timeline and main challenge?"
+                                            placeholder="What are you building? What&apos;s your timeline and main challenge?"
                                             className={inputClass(errors.message)} />
                                         {errors.message && <p className="mt-1 text-xs text-red-600">{errors.message}</p>}
                                     </div>

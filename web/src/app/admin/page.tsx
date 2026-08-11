@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Users, Briefcase, FileText, FolderGit2, RefreshCw } from 'lucide-react';
 import Link from 'next/link';
-import { api, AdminStats } from '@/lib/api';
+import { api, AdminStats, ApiError } from '@/lib/api';
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState<AdminStats | null>(null);
@@ -15,9 +15,9 @@ export default function AdminDashboard() {
             const token = localStorage.getItem('admin_token') || '';
             const data = await api.admin.stats(token);
             setStats(data);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Failed to fetch stats:', err);
-            if (err.status === 401 || err.code === 'INVALID_TOKEN' || err.code === 'NO_TOKEN') {
+            if (err instanceof ApiError && (err.status === 401 || err.code === 'INVALID_TOKEN' || err.code === 'NO_TOKEN')) {
                 localStorage.removeItem('admin_token');
                 window.location.href = '/admin/login';
                 return;

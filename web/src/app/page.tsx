@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { CheckCircle2, ChevronRight } from 'lucide-react';
 import { api } from '@/lib/api';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { SolutionsSection } from '@/components/sections/SolutionsSection';
@@ -12,7 +10,6 @@ import { CaseStudiesSection } from '@/components/sections/CaseStudiesSection';
 import { EngagementModelsSection } from '@/components/sections/EngagementModelsSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { FinalCTASection } from '@/components/sections/FinalCTASection';
-import { AnimateIn } from '@/components/ui/AnimateIn';
 
 export const metadata: Metadata = {
     title: 'TriFusion Tech LLP | Custom Software & GST Accounting Systems',
