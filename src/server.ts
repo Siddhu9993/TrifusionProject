@@ -11,8 +11,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.API_PORT || 3001;
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || 'http://localhost:3000').split(',');
+const PORT = process.env.PORT || process.env.API_PORT || 3001;
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '*').split(',');
 
 // ── Security Middleware ──────────────────────────────────────
 app.use(helmet());
