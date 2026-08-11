@@ -12,18 +12,13 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || process.env.API_PORT || 3001;
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '*').split(',');
+const rawOrigins = process.env.ALLOWED_ORIGINS || '*';
+const ALLOWED_ORIGINS = rawOrigins.replace(/["']/g, '').split(',');
 
 // ── Security Middleware ──────────────────────────────────────
 app.use(helmet());
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || ALLOWED_ORIGINS.includes(origin) || ALLOWED_ORIGINS.includes('*')) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: true,
     credentials: true,
 }));
 
