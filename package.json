@@ -8,6 +8,7 @@
     "dev:api": "npx tsx watch src/server.ts",
     "dev:web": "cd web && npm run dev",
     "dev": "npx concurrently -n API,WEB -c blue,green \"npm run dev:api\" \"npm run dev:web\"",
+    "postinstall": "cd web && npm install --no-audit",
     "build:api": "npx tsc",
     "build:web": "cd web && npm run build",
     "build": "npm run build:api && npm run build:web",
