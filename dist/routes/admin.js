@@ -2,15 +2,16 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const prisma_js_1 = require("../utils/prisma.js");
+const googleSheets_js_1 = require("../services/googleSheets.js");
 const response_js_1 = require("../utils/response.js");
 const auth_js_1 = require("../middlewares/auth.js");
 const router = (0, express_1.Router)();
 // GET /api/admin/stats — dashboard overview
 router.get('/stats', auth_js_1.authenticateToken, auth_js_1.requireAdmin, async (_req, res) => {
     try {
-        const [totalLeads, newLeads, services, publishedServices, industries, caseStudies, products, testimonials, blogPosts, publishedPosts, jobs, applications,] = await Promise.all([
-            prisma_js_1.prisma.lead.count(),
-            prisma_js_1.prisma.lead.count({ where: { status: 'NEW' } }),
+        // Leads come from Google Sheets; everything else from Prisma/SQLite
+        const [leadRows, services, publishedServices, industries, caseStudies, products, testimonials, blogPosts, publishedPosts, jobs, applications,] = await Promise.all([
+            (0, googleSheets_js_1.readLeadRows)().catch(() => []), // graceful fallback
             prisma_js_1.prisma.service.count(),
             prisma_js_1.prisma.service.count({ where: { published: true } }),
             prisma_js_1.prisma.industry.count({ where: { published: true } }),
@@ -22,6 +23,8 @@ router.get('/stats', auth_js_1.authenticateToken, auth_js_1.requireAdmin, async 
             prisma_js_1.prisma.job.count({ where: { published: true } }),
             prisma_js_1.prisma.jobApplication.count(),
         ]);
+        const totalLeads = leadRows.length;
+        const newLeads = leadRows.filter(r => r['Status'] === 'New').length;
         return (0, response_js_1.ok)(res, {
             leads: { total: totalLeads, new: newLeads },
             services: { total: services, published: publishedServices },
@@ -40,11 +43,18 @@ router.get('/stats', auth_js_1.authenticateToken, auth_js_1.requireAdmin, async 
 // GET /api/admin/leads/recent
 router.get('/leads/recent', auth_js_1.authenticateToken, auth_js_1.requireAdmin, async (_req, res) => {
     try {
-        const leads = await prisma_js_1.prisma.lead.findMany({
-            take: 5,
-            orderBy: { createdAt: 'desc' },
-        });
-        return (0, response_js_1.ok)(res, leads);
+        const rows = await (0, googleSheets_js_1.readLeadRows)();
+        // Return the 5 most recent (rows are in append order, so last 5)
+        const recent = rows.slice(-5).reverse().map(r => ({
+            id: r['ID'],
+            leadRef: r['ID'],
+            name: r['Name'],
+            email: r['Email'],
+            company: r['Company'],
+            status: r['Status'],
+            createdAt: r['Timestamp'],
+        }));
+        return (0, response_js_1.ok)(res, recent);
     }
     catch (err) {
         return (0, response_js_1.serverError)(res, err);
