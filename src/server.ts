@@ -18,7 +18,7 @@ const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '*').split(',');
 app.use(helmet());
 app.use(cors({
     origin: (origin, callback) => {
-        if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+        if (!origin || ALLOWED_ORIGINS.includes(origin) || ALLOWED_ORIGINS.includes('*')) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
