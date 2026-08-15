@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { api } from '@/lib/api';
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
-import { fallbackIndustries } from '@/components/sections/IndustriesSection';
+import { fallbackIndustries } from '@/lib/fallbackData';
 
 interface Props {
     params: { slug: string };
