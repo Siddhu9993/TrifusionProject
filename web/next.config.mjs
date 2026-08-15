@@ -2,7 +2,7 @@
 const nextConfig = {
   // API base URL for server-side fetches
   env: {
-    API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001',
+    API_URL: process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'production' ? 'https://trifusionproject-1.onrender.com' : 'http://localhost:3001'),
   },
   images: {
     remotePatterns: [

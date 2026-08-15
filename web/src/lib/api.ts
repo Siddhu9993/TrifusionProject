@@ -3,7 +3,7 @@
 // Next.js → Express API communication layer
 // ============================================================
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'production' ? 'https://trifusionproject-1.onrender.com' : 'http://localhost:3001');
 
 type ApiOptions = {
     method?: string;

@@ -71,7 +71,7 @@ function buildMailtoUrl(form: WidgetFormData): string {
 
 async function captureLeadSilently(data: WidgetFormData) {
     try {
-        const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+        const API = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'production' ? 'https://trifusionproject-1.onrender.com' : 'http://localhost:3001');
         await fetch(`${API}/api/leads`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -166,7 +166,7 @@ export function FloatingContactWidget() {
         setStatus('loading');
         setApiError('');
         try {
-            const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+            const API = process.env.NEXT_PUBLIC_API_URL || (process.env.NODE_ENV === 'production' ? 'https://trifusionproject-1.onrender.com' : 'http://localhost:3001');
             const res = await fetch(`${API}/api/leads`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
