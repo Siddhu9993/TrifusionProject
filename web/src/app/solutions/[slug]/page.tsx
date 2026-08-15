@@ -11,19 +11,37 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    let service;
     try {
-        const service = await api.services.get(params.slug);
-        return {
-            title: service.seoTitle || `${service.title} Services`,
-            description: service.seoDesc || service.shortDesc,
-        };
+        service = await api.services.get(params.slug);
     } catch {
-        const fallback = fallbackServices.find(s => s.slug === params.slug);
-        if (fallback) {
-            return { title: `${fallback.title} Services`, description: fallback.shortDesc };
-        }
-        return { title: 'Service Not Found' };
+        service = fallbackServices.find(s => s.slug === params.slug);
     }
+
+    if (!service) return { title: 'Service Not Found' };
+
+    const title = service.seoTitle || `${service.title} Services | Trifusion Technology`;
+    const description = service.seoDesc || service.shortDesc;
+    const url = `/solutions/${params.slug}`;
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url,
+            type: 'website',
+        },
+        twitter: {
+            title,
+            description,
+            card: 'summary_large_image',
+        },
+        alternates: {
+            canonical: url,
+        }
+    };
 }
 
 export default async function ServicePage({ params }: Props) {

@@ -78,9 +78,9 @@ export function HeroSection() {
 
                     {/* Subheadline */}
                     <StaggerItem>
-                        <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed font-normal">
+                        <h2 className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed font-normal">
                             From bespoke software applications to streamlined business operations — we engineer technology that empowers efficiency, compliance, and control.
-                        </p>
+                        </h2>
                     </StaggerItem>
 
                     {/* CTAs */}

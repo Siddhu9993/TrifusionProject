@@ -40,6 +40,9 @@ export const metadata: Metadata = {
             "max-snippet": -1,
         },
     },
+    alternates: {
+        canonical: siteConfig.url,
+    },
 };
 
 import { PublicOnly, MainWrapper } from "@/components/layout/PublicOnly";
@@ -60,6 +63,63 @@ export default function RootLayout({
                     <Navbar />
                 </PublicOnly>
                 
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "LocalBusiness",
+                            "name": siteConfig.name,
+                            "image": `${siteConfig.url}${siteConfig.ogImage}`,
+                            "@id": siteConfig.url,
+                            "url": siteConfig.url,
+                            "telephone": siteConfig.contact.phone,
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": siteConfig.contact.addressShort,
+                                "addressLocality": "Pune",
+                                "addressRegion": "Maharashtra",
+                                "postalCode": "411046",
+                                "addressCountry": "IN"
+                            },
+                            "openingHoursSpecification": {
+                                "@type": "OpeningHoursSpecification",
+                                "dayOfWeek": [
+                                    "Monday",
+                                    "Tuesday",
+                                    "Wednesday",
+                                    "Thursday",
+                                    "Friday"
+                                ],
+                                "opens": "09:00",
+                                "closes": "18:00"
+                            },
+                            "sameAs": [
+                                siteConfig.social.linkedin,
+                                siteConfig.social.twitter,
+                                siteConfig.social.instagram,
+                                siteConfig.social.facebook
+                            ].filter(Boolean)
+                        })
+                    }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "WebSite",
+                            "name": siteConfig.name,
+                            "url": siteConfig.url,
+                            "potentialAction": {
+                                "@type": "SearchAction",
+                                "target": `${siteConfig.url}/search?q={search_term_string}`,
+                                "query-input": "required name=search_term_string"
+                            }
+                        })
+                    }}
+                />
+
                 <MainWrapper>
                     {children}
                 </MainWrapper>

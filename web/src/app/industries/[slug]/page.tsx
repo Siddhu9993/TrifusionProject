@@ -10,22 +10,37 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    let ind;
     try {
-        const ind = await api.industries.get(params.slug);
-        return {
-            title: `${ind.title} Software Solutions — Trifusion Technology`,
-            description: ind.shortDesc || `Custom software engineering for ${ind.title}.`,
-        };
+        ind = await api.industries.get(params.slug);
     } catch {
-        const fallback = fallbackIndustries.find(i => i.slug === params.slug);
-        if (fallback) {
-            return {
-                title: `${fallback.title} Software Solutions — Trifusion Technology`,
-                description: `Custom software engineering for ${fallback.title}.`
-            };
-        }
-        return { title: 'Industry — Trifusion Technology' };
+        ind = fallbackIndustries.find(i => i.slug === params.slug);
     }
+
+    if (!ind) return { title: 'Industry — Trifusion Technology' };
+
+    const title = `${ind.title} Software Solutions — Trifusion Technology`;
+    const description = ind.shortDesc || `Custom software engineering for ${ind.title}.`;
+    const url = `/industries/${params.slug}`;
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+            url,
+            type: 'website',
+        },
+        twitter: {
+            title,
+            description,
+            card: 'summary_large_image',
+        },
+        alternates: {
+            canonical: url,
+        }
+    };
 }
 
 export default async function IndustryDetailPage({ params }: Props) {
