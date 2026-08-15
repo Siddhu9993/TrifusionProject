@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!ind) return { title: 'Industry — Trifusion Technology' };
 
     const title = `${ind.title} Software Solutions — Trifusion Technology`;
-    const description = (ind as any).shortDesc || `Custom software engineering for ${ind.title}.`;
+    const description = (ind as { shortDesc?: string }).shortDesc || `Custom software engineering for ${ind.title}.`;
     const url = `/industries/${params.slug}`;
 
     return {

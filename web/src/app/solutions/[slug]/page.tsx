@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!service) return { title: 'Service Not Found' };
 
-    const title = (service as any).seoTitle || `${service.title} Services | Trifusion Technology`;
-    const description = (service as any).seoDesc || service.shortDesc;
+    const title = (service as { seoTitle?: string }).seoTitle || `${service.title} Services | Trifusion Technology`;
+    const description = (service as { seoDesc?: string }).seoDesc || service.shortDesc;
     const url = `/solutions/${params.slug}`;
 
     return {
