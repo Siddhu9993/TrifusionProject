@@ -27,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ServicePage({ params }: Props) {
-    let service;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let service: any;
     try {
         service = await api.services.get(params.slug);
     } catch {
@@ -94,7 +95,7 @@ export default async function ServicePage({ params }: Props) {
                             <h2 className="mt-4 text-3xl font-bold text-[#0B1F4A]">What we deliver</h2>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                            {service.features.map(f => (
+                            {service.features.map((f: { id: string; title: string; desc?: string }) => (
                                 <div key={f.id} className="card p-5 flex items-start gap-4">
                                     <CheckCircle2 className="w-5 h-5 text-[#0066FF] flex-shrink-0 mt-0.5" />
                                     <div>
@@ -117,7 +118,7 @@ export default async function ServicePage({ params }: Props) {
                             <h2 className="mt-4 text-3xl font-bold text-[#0B1F4A]">Built with</h2>
                         </div>
                         <div className="flex flex-wrap justify-center gap-3">
-                            {service.technologies.map(t => (
+                            {service.technologies.map((t: { id: string; name: string }) => (
                                 <span key={t.id} className="px-4 py-2 rounded-lg bg-slate-50 border border-slate-200 text-sm font-medium text-slate-700 hover:bg-blue-50 hover:border-blue-200 hover:text-[#0066FF] transition-colors">
                                     {t.name}
                                 </span>

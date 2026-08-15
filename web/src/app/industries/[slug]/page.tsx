@@ -41,8 +41,8 @@ export default async function IndustryDetailPage({ params }: Props) {
         ind = fallback;
     }
 
-    const challenges = ind.challenges ? (typeof ind.challenges === 'string' ? JSON.parse(ind.challenges) : [ind.challenge]) : (ind.challenge ? [ind.challenge] : []);
-    const outcomes = ind.outcomes ? (typeof ind.outcomes === 'string' ? JSON.parse(ind.outcomes) : [ind.solution]) : (ind.solution ? [ind.solution] : []);
+    const challenges: string[] = ind.challenges ? (typeof ind.challenges === 'string' ? JSON.parse(ind.challenges) : [ind.challenge]) : (ind.challenge ? [ind.challenge] : []);
+    const outcomes: string[] = ind.outcomes ? (typeof ind.outcomes === 'string' ? JSON.parse(ind.outcomes) : [ind.solution]) : (ind.solution ? [ind.solution] : []);
 
     return (
         <>
