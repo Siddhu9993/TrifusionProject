@@ -3,11 +3,9 @@
 // Backend API only — Next.js frontend served separately
 // ============================================================
 
+import 'dotenv/config';
 import express from 'express';
 import helmet from 'helmet';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.API_PORT || process.env.PORT || 3001;
