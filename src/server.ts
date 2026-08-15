@@ -13,7 +13,9 @@ const rawOrigins = process.env.ALLOWED_ORIGINS || '*';
 const ALLOWED_ORIGINS = rawOrigins.replace(/["']/g, '').split(',');
 
 // ── Security Middleware ──────────────────────────────────────
-app.use(helmet());
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+}));
 app.use((req, res, next) => {
     const origin = req.headers.origin;
     res.setHeader('Access-Control-Allow-Origin', origin || '*');
