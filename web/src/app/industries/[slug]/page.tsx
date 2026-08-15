@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function IndustryDetailPage({ params }: Props) {
-    let ind;
+    let ind: any;
     try {
         ind = await api.industries.get(params.slug);
     } catch {
