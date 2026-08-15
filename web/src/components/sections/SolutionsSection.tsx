@@ -19,7 +19,7 @@ const iconMap: Record<string, string> = {
     'refresh-cw': '🔄',
 };
 
-const fallbackServices = [
+export const fallbackServices = [
     { id: '1', slug: 'custom-software-development', title: 'Custom Software Development', shortDesc: 'Bespoke software engineered around your exact business workflows.', icon: 'code-2', published: true, featured: true, sortOrder: 0 },
     { id: '2', slug: 'web-application-development', title: 'Web Application Development', shortDesc: 'High-performance web applications built for scale and conversion.', icon: 'globe', published: true, featured: true, sortOrder: 1 },
     { id: '3', slug: 'mobile-app-development', title: 'Mobile App Development', shortDesc: 'Native and cross-platform apps for iOS and Android.', icon: 'smartphone', published: true, featured: true, sortOrder: 2 },

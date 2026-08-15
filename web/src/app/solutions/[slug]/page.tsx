@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { api } from '@/lib/api';
 import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
 import { FAQSection } from '@/components/sections/FAQSection';
+import { fallbackServices } from '@/components/sections/SolutionsSection';
 
 interface Props {
     params: { slug: string };
@@ -17,6 +18,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: service.seoDesc || service.shortDesc,
         };
     } catch {
+        const fallback = fallbackServices.find(s => s.slug === params.slug);
+        if (fallback) {
+            return { title: `${fallback.title} Services`, description: fallback.shortDesc };
+        }
         return { title: 'Service Not Found' };
     }
 }
@@ -26,7 +31,11 @@ export default async function ServicePage({ params }: Props) {
     try {
         service = await api.services.get(params.slug);
     } catch {
-        notFound();
+        const fallback = fallbackServices.find(s => s.slug === params.slug);
+        if (!fallback) {
+            notFound();
+        }
+        service = fallback;
     }
 
     return (
