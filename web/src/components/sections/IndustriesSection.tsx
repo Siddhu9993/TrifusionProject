@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { clsx } from 'clsx';
 
-const industries = [
+export const fallbackIndustries = [
     { slug: 'healthcare', title: 'Healthcare', icon: '🏥', challenge: 'Security, compliance, and modernizing legacy patient systems.', solution: 'HIPAA-aware architectures, EHR integrations, patient portals, and telehealth platforms.' },
     { slug: 'education', title: 'Education', icon: '🎓', challenge: 'Engagement, scalability, and delivering personalized learning at scale.', solution: 'LMS platforms, student management systems, and adaptive learning applications.' },
     { slug: 'fintech', title: 'FinTech', icon: '🏦', challenge: 'Regulatory compliance, real-time processing, and building trust.', solution: 'Compliant payment systems, fraud detection, and secure financial dashboards.' },
@@ -18,7 +18,7 @@ const industries = [
 
 export function IndustriesSection() {
     const [active, setActive] = useState(0);
-    const current = industries[active];
+    const current = fallbackIndustries[active];
 
     return (
         <section className="section bg-white">
@@ -36,7 +36,7 @@ export function IndustriesSection() {
                 <div className="grid lg:grid-cols-5 gap-8">
                     {/* Tabs */}
                     <div className="lg:col-span-2 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0">
-                        {industries.map((ind, i) => (
+                        {fallbackIndustries.map((ind, i) => (
                             <button
                                 key={ind.slug}
                                 onClick={() => setActive(i)}

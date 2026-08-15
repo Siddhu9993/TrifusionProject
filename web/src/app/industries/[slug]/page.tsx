@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { api } from '@/lib/api';
 import { ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
+import { fallbackIndustries } from '@/components/sections/IndustriesSection';
 
 interface Props {
     params: { slug: string };
@@ -16,6 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: ind.shortDesc || `Custom software engineering for ${ind.title}.`,
         };
     } catch {
+        const fallback = fallbackIndustries.find(i => i.slug === params.slug);
+        if (fallback) {
+            return {
+                title: `${fallback.title} Software Solutions — Trifusion Technology`,
+                description: `Custom software engineering for ${fallback.title}.`
+            };
+        }
         return { title: 'Industry — Trifusion Technology' };
     }
 }
@@ -25,11 +33,15 @@ export default async function IndustryDetailPage({ params }: Props) {
     try {
         ind = await api.industries.get(params.slug);
     } catch {
-        notFound();
+        const fallback = fallbackIndustries.find(i => i.slug === params.slug);
+        if (!fallback) {
+            notFound();
+        }
+        ind = fallback;
     }
 
-    const challenges = ind.challenges ? JSON.parse(ind.challenges) as string[] : [];
-    const outcomes = ind.outcomes ? JSON.parse(ind.outcomes) as string[] : [];
+    const challenges = ind.challenges ? (typeof ind.challenges === 'string' ? JSON.parse(ind.challenges) : [ind.challenge]) : (ind.challenge ? [ind.challenge] : []);
+    const outcomes = ind.outcomes ? (typeof ind.outcomes === 'string' ? JSON.parse(ind.outcomes) : [ind.solution]) : (ind.solution ? [ind.solution] : []);
 
     return (
         <>
