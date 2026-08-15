@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || process.env.API_PORT || 3001;
+const PORT = process.env.API_PORT || process.env.PORT || 3001;
 const rawOrigins = process.env.ALLOWED_ORIGINS || '*';
 const ALLOWED_ORIGINS = rawOrigins.replace(/["']/g, '').split(',');
 
@@ -68,6 +68,10 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/admin', adminRoutes);
 
 // ── Health Check ─────────────────────────────────────────────
+app.get('/', (_req, res) => {
+    res.json({ success: true, message: 'Welcome to Trifusion API' });
+});
+
 app.get('/api/health', (_req, res) => {
     res.json({ success: true, data: { status: 'ok', service: 'Trifusion API', time: new Date() } });
 });

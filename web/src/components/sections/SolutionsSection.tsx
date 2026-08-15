@@ -38,10 +38,10 @@ export function SolutionsSection({ services }: Props) {
                     <div>
                         <span className="label-tag">Our Solutions</span>
                         <h2 className="mt-4 text-3xl sm:text-4xl font-bold text-[#0B1F4A]">
-                            Software &amp; GST Solutions Built to Scale
+                            Software &amp; Business Solutions Built to Scale
                         </h2>
                         <p className="mt-3 text-slate-500 max-w-xl">
-                            From greenfield product development to GST automation and complex systems integration — we cover the full spectrum of modern software engineering.
+                            From greenfield product development to operations automation and complex systems integration — we cover the full spectrum of modern software engineering.
                         </p>
                     </div>
                     <Link href="/solutions" className="btn-ghost flex-shrink-0">

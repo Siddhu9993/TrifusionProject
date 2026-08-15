@@ -49,7 +49,7 @@ export function HeroSection() {
                         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50/80 border border-blue-200/80 backdrop-blur-md mb-8 shadow-sm">
                             <Sparkles className="w-4 h-4 text-[#0066FF]" />
                             <span className="text-xs sm:text-sm tracking-[0.15em] font-bold text-[#0066FF] uppercase">
-                                Custom Software & Smart GST Solutions
+                                CUSTOM SOFTWARE & SMART BUSINESS SOLUTIONS
                             </span>
                         </div>
                     </StaggerItem>
@@ -79,7 +79,7 @@ export function HeroSection() {
                     {/* Subheadline */}
                     <StaggerItem>
                         <p className="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed font-normal">
-                            From bespoke software applications to audit-ready GST automation — we engineer technology that gives you operational control and seamless compliance.
+                            From bespoke software applications to streamlined business operations — we engineer technology that empowers efficiency, compliance, and control.
                         </p>
                     </StaggerItem>
 

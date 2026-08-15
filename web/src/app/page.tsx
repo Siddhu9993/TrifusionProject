@@ -12,11 +12,11 @@ import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { FinalCTASection } from '@/components/sections/FinalCTASection';
 
 export const metadata: Metadata = {
-    title: 'TriFusion Tech LLP | Custom Software & GST Accounting Systems',
-    description: 'TriFusion Tech LLP builds custom software, GST accounting systems, mobile applications, and AI-powered solutions for businesses ready to scale.',
+    title: 'TriFusion Tech LLP | Custom Software & Tax Accounting Systems',
+    description: 'TriFusion Tech LLP builds custom software, Tax accounting systems, mobile applications, and AI-powered solutions for businesses ready to scale.',
     openGraph: {
-        title: 'TriFusion Tech LLP | Custom Software & GST Accounting Systems',
-        description: 'From bespoke software to audit-ready GST automation — we engineer technology that gives you operational control and seamless compliance.',
+        title: 'TriFusion Tech LLP | Custom Software & Tax Accounting Systems',
+        description: 'From bespoke software to audit-ready Tax automation — we engineer technology that gives you operational control and seamless compliance.',
     },
 };
 
