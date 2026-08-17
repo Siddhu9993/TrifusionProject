@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Phone, Mail, MapPin, Loader2, CheckCircle2, AlertCircle, Send } from 'lucide-react';
+import { X, Phone, Mail, MapPin, CheckCircle2, AlertCircle } from 'lucide-react';
 
 // ── Business Constants ──────────────────────────────────────────
 const BUSINESS = {
