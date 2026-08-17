@@ -56,7 +56,7 @@ export function HeroSection() {
 
                     {/* Headline */}
                     <StaggerItem>
-                        <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-[80px] font-bold text-[#0B1F4A] leading-[1.1] sm:leading-[1.08] mb-6 sm:mb-8"
+                        <h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-[80px] font-bold text-[#0B1F4A] leading-tight sm:leading-[1.08] mb-6 sm:mb-8"
                             style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.03em' }}>
                             We Build Digital Systems<br />
                             That <span className="inline-flex min-w-[300px] sm:min-w-[450px] justify-center sm:justify-start">
