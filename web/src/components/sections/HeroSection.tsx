@@ -42,7 +42,7 @@ export function HeroSection() {
                 />
             </div>
 
-            <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-32 pb-16 sm:pb-24 text-center">
+            <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-20 sm:pb-28 text-center -mt-6 sm:-mt-10">
                 <StaggerContainer staggerChildren={0.15}>
                     {/* Eyebrow badge */}
                     <StaggerItem>

@@ -98,16 +98,31 @@ export function ProjectDrawer() {
     const handleSubmit = async (ev: React.FormEvent) => {
         ev.preventDefault();
         if (!validate()) return;
-        setStatus('loading');
-        setErrorMsg('');
-        try {
-            const result = await api.leads.submit(form);
-            setLeadRef(result.leadRef);
-            setStatus('success');
-        } catch (err: unknown) {
-            setStatus('error');
-            setErrorMsg(err instanceof Error ? err.message : "We couldn't send your message. Please try again.");
-        }
+        
+        const lines = [
+            `Hello Trifusion Technology LLP,`,
+            '',
+            'I would like to discuss a project.',
+            '',
+            `Name: ${form.name}`,
+            `Email: ${form.email}`,
+            form.phone ? `Phone: ${form.phone}` : null,
+            form.company ? `Company: ${form.company}` : null,
+            form.serviceInterest ? `Service: ${form.serviceInterest}` : null,
+            form.budgetRange ? `Budget: ${form.budgetRange}` : null,
+            `Project: ${form.message}`,
+            '',
+            'Thank you.',
+        ].filter(Boolean);
+        
+        const whatsappNum = '919309505277';
+        const url = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(lines.join('\n'))}`;
+
+        // Capture lead silently without blocking the redirect
+        api.leads.submit(form).catch(console.error);
+        
+        window.open(url, '_blank', 'noopener,noreferrer');
+        close();
     };
 
     const inputClass = (err?: string) =>

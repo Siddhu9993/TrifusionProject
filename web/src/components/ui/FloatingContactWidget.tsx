@@ -318,32 +318,16 @@ export function FloatingContactWidget() {
                                         Send on WhatsApp
                                     </button>
 
-                                    {/* Email + Submit row */}
-                                    <div className="grid grid-cols-2 gap-2.5">
-                                        <button
-                                            type="button"
-                                            onClick={handleEmail}
-                                            className="inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-white border border-slate-200 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-50 hover:border-slate-300 active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]"
-                                            aria-label="Send requirement via Email"
-                                        >
-                                            <Mail className="w-4 h-4" aria-hidden="true" />
-                                            Send Email
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            disabled={status === 'loading'}
-                                            className="inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-[#0066FF] text-white text-sm font-bold rounded-xl hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed active:scale-[0.98] transition-all shadow-md shadow-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-                                        >
-                                            {status === 'loading' ? (
-                                                <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                                            ) : (
-                                                <>
-                                                    <Send className="w-3.5 h-3.5" aria-hidden="true" />
-                                                    Submit
-                                                </>
-                                            )}
-                                        </button>
-                                    </div>
+                                    {/* Email Action */}
+                                    <button
+                                        type="button"
+                                        onClick={handleEmail}
+                                        className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-white border border-slate-200 text-slate-700 text-sm font-semibold rounded-xl hover:bg-slate-50 hover:border-slate-300 active:scale-[0.98] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0066FF]"
+                                        aria-label="Send requirement via Email"
+                                    >
+                                        <Mail className="w-4 h-4" aria-hidden="true" />
+                                        Send Email
+                                    </button>
 
                                     {/* Contact Info */}
                                     <ContactInfoBar />
